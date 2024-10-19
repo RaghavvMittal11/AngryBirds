@@ -58,6 +58,7 @@
             // Center the level tablet on the screen and scale it
             centerAndScaleLevelTablet();
         }
+
         private void drawBackground() {
             float screenWidth = Gdx.graphics.getWidth();
             float screenHeight = Gdx.graphics.getHeight();
@@ -119,9 +120,9 @@
             // Update the world
             stage.act(delta);
             stage.draw();
-            System.out.println("Stage drawn");
+//            System.out.println("Stage drawn");
             levelGen.regenerateLevel();
-            System.out.println("Level generated");
+//            System.out.println("Level generated");
 
             checkForClicks();
         }
@@ -157,7 +158,7 @@
 
             // Check if level tablets are clicked
             if (pauseButton.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
-                System.out.println("Back button clicked");
+//                System.out.println("Back button clicked");
                 game.setScreen(new Level1Screen(game));  // Change to MainMenu
             }
         }
