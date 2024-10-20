@@ -108,6 +108,7 @@ public class GameScreen implements Screen {
 
     private void updateFade(float delta) {
         if (fadeAlpha < 1.0f) {
+            fadeAlpha += delta / 2.0f;
         }
     }
 

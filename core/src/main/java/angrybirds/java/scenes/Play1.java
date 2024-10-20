@@ -29,7 +29,6 @@
         private Ground1 ground1;
         private Platform platform;
         private Box2DDebugRenderer debugRenderer;
-
         private Stage stage;
         private LevelGen levelGen;
 
@@ -37,7 +36,7 @@
 
         Play1(Main game) {
             this.game = game;
-            this.bg = new Texture("Background/background.png");
+            this.bg = new Texture("Background/backg.jpg");
             // Load the level tablet image and create the sprite
             this.pauseButton = new Sprite(new Texture("Buttons/MainMenu/Pause.png"));
             this.world = new World(new Vector2(0.0F, -9.8F), true);
