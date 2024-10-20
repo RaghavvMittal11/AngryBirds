@@ -3,6 +3,7 @@ package angrybirds.java.scenes;
 import angrybirds.java.Main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -24,7 +25,7 @@ public class GameScreen implements Screen {
     private Viewport gameViewport;
     private float fadeAlpha = 0.5F;
     private Sprite back;
-
+    private Music backgroundMusic;  // New Music object for background sound
     public GameScreen(Main game) {
         this.game = game;
         this.bg = new Texture("Background/levelScreen.jpg");
@@ -43,6 +44,13 @@ public class GameScreen implements Screen {
         this.mainCamera = new OrthographicCamera();
         this.mainCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.gameViewport = new StretchViewport(1919.0F, 1079.0F, this.mainCamera);
+
+        // Load the background music
+        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/SoundLevelScreen.mp3"));
+        this.backgroundMusic.setLooping(true);  // Set to loop continuously
+        this.backgroundMusic.setVolume(1.0f);
+
+
 
         // Center the level tablet on the screen and scale it
         centerAndScaleLevelTablet();
@@ -214,6 +222,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        backgroundMusic.play();
+
     }
 
 //    @Override
@@ -317,7 +327,7 @@ public class GameScreen implements Screen {
         level2.getTexture().dispose();
         level3.getTexture().dispose();
         back.getTexture().dispose();
-
+        backgroundMusic.dispose();  // Dispose of the music to avoid memory leaks
     }
 }
 

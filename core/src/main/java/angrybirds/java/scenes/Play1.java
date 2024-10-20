@@ -5,6 +5,7 @@
     import angrybirds.java.ground.Platform;
     import com.badlogic.gdx.Gdx;
     import com.badlogic.gdx.Screen;
+    import com.badlogic.gdx.audio.Music;
     import com.badlogic.gdx.graphics.GL20;
     import com.badlogic.gdx.graphics.OrthographicCamera;
     import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +20,7 @@
     import com.badlogic.gdx.utils.viewport.Viewport;
 
     public class Play1 implements Screen{
+        private final Music backgroundMusic;
         private Main game;
         private Texture bg;
         private OrthographicCamera mainCamera;
@@ -54,6 +56,9 @@
             this.stage = new Stage();
             this.levelGen = new LevelGen(world, stage);
 
+            this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/playSound.mp3"));
+            this.backgroundMusic.setLooping(true);  // Set to loop continuously
+            this.backgroundMusic.setVolume(1.0f);
             // Center the level tablet on the screen and scale it
             centerAndScaleLevelTablet();
         }
@@ -90,6 +95,7 @@
             }
         }
         public void show() {
+            backgroundMusic.play();
         }
         public void render(float delta) {
             // Clear the screen with a black color
@@ -185,6 +191,7 @@
             platform.dispose();
             stage.dispose();
             levelGen.dispose();
+            debugRenderer.dispose();
         }
     }
 
