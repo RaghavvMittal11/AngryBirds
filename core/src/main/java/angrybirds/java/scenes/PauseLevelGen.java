@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LevelGen {
+public class PauseLevelGen {
     private World world;
     private Stage stage;
     private float scaleFactor = 0.7f;
@@ -28,7 +28,7 @@ public class LevelGen {
     private int[][][] levels;
     private int[][] gridSizes = {{10, 3}, {7, 5}, {11, 4}}; // Sizes for each grid
 
-    public LevelGen(World world, Stage stage) {
+    public PauseLevelGen(World world, Stage stage) {
         this.world = world;
         this.stage = stage;
 
@@ -148,11 +148,12 @@ public class LevelGen {
         Sprite sprite[] = {
             new Sprite(new Texture(Gdx.files.internal("Background/red-bird.png"))),
             new Sprite(new Texture(Gdx.files.internal("Background/silver.png"))),
-            new Sprite(new Texture(Gdx.files.internal("Background/terence.png")))
+            new Sprite(new Texture(Gdx.files.internal("Background/terence.png"))),
+            new Sprite(new Texture(Gdx.files.internal("Background/BlackBomb.png")))
         };
-        int x[]={100,210,330};
-        int y[]={230,240,240};
-        for(int i=0;i<3;i++){
+        int x[]={100,210,330,600};
+        int y[]={230,240,240,660};
+        for(int i=0;i<4;i++){
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.StaticBody;
             bodyDef.position.set(x[i] / 100f, y[i] / 100f);

@@ -121,41 +121,6 @@ public class GameScreen implements Screen {
     }
 
 
-    // Method to center and scale the level tablet image
-//    private void centerAndScaleLevelTablet() {
-//        float screenWidth = Gdx.graphics.getWidth();
-//        float screenHeight = Gdx.graphics.getHeight();
-//
-//        // Define a percentage of the screen to use for the level tablet's size (adjust as necessary)
-//        float tabletWidth = screenWidth * 0.25f;
-//        float tabletHeight = screenHeight * 0.11f;
-//
-//        // Set the size of the level tablets
-//        levelTablet1.setSize(tabletWidth, tabletHeight);
-//        levelTablet2.setSize(tabletWidth, tabletHeight);
-//        levelTablet3.setSize(tabletWidth, tabletHeight);
-//        bird.setSize(tabletWidth, tabletHeight);
-//
-//        // Position the level tablets with better relative placement
-//        levelTablet1.setPosition(
-//            (screenWidth - tabletWidth) / 2 + 600,  // Center horizontally
-//            (screenHeight - tabletHeight) / 2 + 200 // Adjust vertical offset
-//        );
-//        levelTablet2.setPosition(
-//            (screenWidth - tabletWidth) / 2 + 600,  // Center horizontally
-//            (screenHeight - tabletHeight) / 2  // Adjust vertical offset
-//        );
-//        levelTablet3.setPosition(
-//            (screenWidth - tabletWidth) / 2 + 600,  // Center horizontally
-//            (screenHeight - tabletHeight) / 2 - 200 // Adjust vertical offset
-//        );
-//
-//        bird.setPosition(
-//            (screenWidth - tabletWidth) / 2 - 600,  // Center horizontally
-//            (screenHeight - tabletHeight) / 2 + 300 // Adjust vertical offset
-//        );
-//    }
-
     private void centerAndScaleLevelTablet() {
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
