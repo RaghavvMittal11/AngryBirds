@@ -4,6 +4,7 @@
     import angrybirds.java.ground.Ground1;
     import angrybirds.java.ground.Platform;
     import com.badlogic.gdx.Gdx;
+    import com.badlogic.gdx.Input;
     import com.badlogic.gdx.Screen;
     import com.badlogic.gdx.audio.Music;
     import com.badlogic.gdx.graphics.GL20;
@@ -161,12 +162,24 @@
             // Convert to world coordinates
             mousePos.y = Gdx.graphics.getHeight() - mousePos.y; // Invert Y-axis
 
-            // Check if level tablets are clicked
+            // Check if pause button is clicked
             if (pauseButton.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
-//                System.out.println("Back button clicked");
-                game.setScreen(new Level1Screen(game));  // Change to MainMenu
+                // Change to Level1Screen when pause button is clicked
+                game.setScreen(new Level1Screen(game));
             }
+
+            // Check for keyboard input
+            if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+                // Show Loose screen when 'L' key is pressed
+                game.setScreen(new Loose(game));
+            }
+
+//            if (Gdx.input.isKeyPressed(Input.Keys.V)) {
+//                // Show Victory screen when 'V' key is pressed
+//                game.setScreen(new VictoryScreen(game));
+//            }
         }
+
         public void resize(int width, int height) {
             // Update the camera's viewport to match the new screen dimensions
             this.gameViewport.update(width, height);

@@ -5,22 +5,26 @@ import angrybirds.java.Main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class MainMenu implements Screen {
+public class Loose implements Screen {
     private Main game;
     private Texture bg;
     private OrthographicCamera mainCamera;
     private Viewport gameViewport;
-    private MainMenuButtons btns;
+//    private MainMenuButtons btns;
     private Music backgroundMusic;  // New Music object for background sound
 
-    public MainMenu(Main game) {
+
+    private Sprite tablet;
+    public Loose(Main game) {
         this.game = game;
-        this.bg = new Texture("Background/MainMenu.jpg");
+        this.bg = new Texture("Background/loose.jpg");
 
         // Set up the camera and viewport
         this.mainCamera = new OrthographicCamera();
@@ -30,8 +34,8 @@ public class MainMenu implements Screen {
 
 
         // Set up main menu buttons
-        this.btns = new MainMenuButtons(game, gameViewport);
-
+//        this.btns = new MainMenuButtons(game, gameViewport);
+        this.tablet=new Sprite(new Texture("Background/wood.png"));
         // Load the background music
         this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Main Theme.mp3"));
         this.backgroundMusic.setLooping(true);  // Set to loop continuously
@@ -57,20 +61,32 @@ public class MainMenu implements Screen {
         // Begin batch and draw the background, scaling it to the current screen size
         game.getBatch().begin();
         game.getBatch().draw(bg, 0.0F, 0.0F, screenWidth, screenHeight);
+        tablet.draw(game.getBatch());
+
         game.getBatch().end();
 
         // Set the batch to use the camera's projection matrix
         game.getBatch().setProjectionMatrix(mainCamera.combined);
-
         // Draw and act on the menu buttons
-        this.btns.getStage().draw();
-        this.btns.getStage().act();
+//        this.btns.getStage().draw();
+//        this.btns.getStage().act();
     }
 
     @Override
     public void resize(int width, int height) {
         // Update the camera's viewport to match the new screen dimensions
         this.gameViewport.update(width, height);
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+
+        // Define the size for the level tablets
+        float tabletWidth = screenWidth * 0.25f;
+        float tabletHeight = screenHeight * 0.11f;
+
+        tablet.setPosition(
+            (screenWidth - tabletWidth) / 2 + 600,  // Adjust horizontal offset
+            (screenHeight - tabletHeight) / 2 + 200 // Adjust vertical offset
+        );
     }
 
 
@@ -82,6 +98,16 @@ public class MainMenu implements Screen {
     public void resume() {
     }
 
+    private void checkForClicks() {
+        // Get mouse position
+        Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+        // Convert to world coordinates
+        mousePos.y = Gdx.graphics.getHeight() - mousePos.y; // Invert Y-axis
+
+        if(tablet.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
+            game.setScreen(new GameScreen(game));
+        }
+    }
     @Override
     public void hide() {
         // Stop the background music when the screen is hidden or changed

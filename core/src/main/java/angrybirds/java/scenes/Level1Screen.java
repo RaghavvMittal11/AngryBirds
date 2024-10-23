@@ -289,7 +289,7 @@ public class Level1Screen implements Screen {
              game.setScreen(new Play1(game));
          }
          if(loadLevel.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
-                System.out.println("Level 2 clicked");
+              //  System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
                 game.setScreen(new Pause(game));
             }
     }

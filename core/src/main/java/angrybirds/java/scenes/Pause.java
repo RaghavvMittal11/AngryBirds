@@ -97,9 +97,13 @@ public class Pause implements Screen {
         debugRenderer.render(world, mainCamera.combined);
         stage.act(delta);
         stage.draw();
-        pauselevelGen.generateRandomLevels();
+        pauselevelGen.regenerateLevel();
+
         checkForClicks();
     }
+
+
+
 
     private void centerAndScaleLevelTablet() {
         float screenWidth = Gdx.graphics.getWidth();
