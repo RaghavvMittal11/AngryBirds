@@ -1,3 +1,4 @@
+
 package angrybirds.java.scenes;
 
 import angrybirds.java.Buttons.MainMenuButtons;
@@ -16,7 +17,8 @@ public class MainMenu implements Screen {
     private OrthographicCamera mainCamera;
     private Viewport gameViewport;
     private MainMenuButtons btns;
-    private Music backgroundMusic;  // New Music object for background sound
+    private static Music backgroundMusic;
+    private static boolean flag = false;
 
     public MainMenu(Main game) {
         this.game = game;
@@ -28,20 +30,22 @@ public class MainMenu implements Screen {
         this.mainCamera.position.set(Gdx.graphics.getWidth() / 2.0F, Gdx.graphics.getHeight() / 2.0F, 0.0F);
         this.gameViewport = new StretchViewport(1919.0F, 1079.0F, this.mainCamera);
 
-
         // Set up main menu buttons
         this.btns = new MainMenuButtons(game, gameViewport);
 
-        // Load the background music
-        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Main Theme.mp3"));
-        this.backgroundMusic.setLooping(true);  // Set to loop continuously
-        this.backgroundMusic.setVolume(0.5f);   // Set volume (adjust to your preference)
+        // Only load and play the background music the first time an object is created
+        if (!flag) {
+            backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Main Theme.mp3"));
+            backgroundMusic.setLooping(true);  // Set to loop continuously
+            backgroundMusic.setVolume(0.5f);   // Set volume (adjust to your preference)
+            backgroundMusic.play();            // Play the music
+            flag = true;                       // Set the flag so it doesn't play again
+        }
     }
 
     @Override
     public void show() {
-        // Play the background music when the menu screen is shown
-        backgroundMusic.play();
+        // No need to play music here as it is handled in the constructor
     }
 
     @Override
@@ -73,7 +77,6 @@ public class MainMenu implements Screen {
         this.gameViewport.update(width, height);
     }
 
-
     @Override
     public void pause() {
     }
@@ -84,14 +87,18 @@ public class MainMenu implements Screen {
 
     @Override
     public void hide() {
-        // Stop the background music when the screen is hidden or changed
-        backgroundMusic.stop();
+        // Optionally, you can stop or pause the music if needed when hiding
+        // backgroundMusic.pause();
     }
 
     @Override
     public void dispose() {
         // Dispose of all resources when no longer needed
         bg.dispose();
-        backgroundMusic.dispose();  // Dispose of the music to avoid memory leaks
+
+        // Only dispose of the music if this is the last screen, otherwise it remains active
+        if (flag && backgroundMusic != null) {
+            backgroundMusic.dispose();
+        }
     }
 }

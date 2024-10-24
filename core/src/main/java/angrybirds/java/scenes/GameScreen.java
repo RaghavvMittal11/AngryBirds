@@ -25,7 +25,7 @@ public class GameScreen implements Screen {
     private Viewport gameViewport;
     private float fadeAlpha = 0.5F;
     private Sprite back;
-    private Music backgroundMusic;  // New Music object for background sound
+//    private Music backgroundMusic;  // New Music object for background sound
     public GameScreen(Main game) {
         this.game = game;
         this.bg = new Texture("Background/levelScreen.jpg");
@@ -46,9 +46,9 @@ public class GameScreen implements Screen {
         this.gameViewport = new StretchViewport(1919.0F, 1079.0F, this.mainCamera);
 
         // Load the background music
-        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/SoundLevelScreen.mp3"));
-        this.backgroundMusic.setLooping(true);  // Set to loop continuously
-        this.backgroundMusic.setVolume(1.0f);
+//        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Main Theme.mp3"));
+//        this.backgroundMusic.setLooping(true);  // Set to loop continuously
+//        this.backgroundMusic.setVolume(1.0f);
 
 
 
@@ -187,7 +187,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        backgroundMusic.play();
+//        backgroundMusic.play();
 
     }
 
@@ -254,9 +254,9 @@ public class GameScreen implements Screen {
             game.setScreen(new Level1Screen(game));  // Transition to Level1Screen
 
         } else if (levelTablet2.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
-            game.setScreen( new Level2Screen(game));  // Transition to Level2Screen
+            game.setScreen( new Level1Screen(game));  // Transition to Level2Screen
         } else if (levelTablet3.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
-            game.setScreen(new Level3Screen(game));  // Transition to Level3Screen
+            game.setScreen(new Level1Screen(game));  // Transition to Level3Screen
         } else if (back.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
             game.setScreen(new MainMenu(game));  // Change to MainMenu
         }
@@ -292,7 +292,7 @@ public class GameScreen implements Screen {
         level2.getTexture().dispose();
         level3.getTexture().dispose();
         back.getTexture().dispose();
-        backgroundMusic.dispose();  // Dispose of the music to avoid memory leaks
+//        backgroundMusic.dispose();  // Dispose of the music to avoid memory leaks
     }
 }
 

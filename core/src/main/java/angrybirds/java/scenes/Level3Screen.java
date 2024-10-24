@@ -268,22 +268,42 @@ public class Level3Screen implements Screen {
     }
 
 
-    private void checkForClicks() {
-        // Get mouse position
-        Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-        // Convert to world coordinates
-        mousePos.y = Gdx.graphics.getHeight() - mousePos.y; // Invert Y-axis
+//    private void checkForClicks() {
+//        // Get mouse position
+//        Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+//        // Convert to world coordinates
+//        mousePos.y = Gdx.graphics.getHeight() - mousePos.y; // Invert Y-axis
+//
+//        // Check if level tablets are clicked
+//        if (back.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
+//            System.out.println("Back button clicked");
+//            game.setScreen(new GameScreen(game));  // Change to MainMenu
+//        }
+//        if(newLevel.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
+//            System.out.println("Level 1 clicked");
+//            game.setScreen(new Play3(game));
+//        }
+//    }
+private void checkForClicks() {
+    // Get mouse position
+    Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+    // Convert to world coordinates
+    mousePos.y = Gdx.graphics.getHeight() - mousePos.y; // Invert Y-axis
 
-        // Check if level tablets are clicked
-        if (back.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
-            System.out.println("Back button clicked");
-            game.setScreen(new GameScreen(game));  // Change to MainMenu
-        }
-        if(newLevel.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
-            System.out.println("Level 1 clicked");
-            game.setScreen(new Play3(game));
-        }
+    // Check if level tablets are clicked
+    if (back.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()) {
+        System.out.println("Back button clicked");
+        game.setScreen(new GameScreen(game));  // Change to MainMenu
     }
+    if(newLevel.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
+        System.out.println("Level 1 clicked");
+        game.setScreen(new Play1(game));
+    }
+    if(loadLevel.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
+        //  System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+        game.setScreen(new Pause(game));
+    }
+}
 
 
 

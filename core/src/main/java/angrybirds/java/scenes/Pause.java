@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Pause implements Screen {
-    private final Music backgroundMusic;
+//    private final Music backgroundMusic;
     private Main game;
     private Texture bg;
     private OrthographicCamera mainCamera;
@@ -49,9 +49,9 @@ public class Pause implements Screen {
         debugRenderer = new Box2DDebugRenderer();
         this.stage = new Stage();
         this.pauselevelGen = new PauseLevelGen(world, stage);
-        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/playSound.mp3"));
-        this.backgroundMusic.setLooping(true);
-        this.backgroundMusic.setVolume(1.0f);
+//        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/playSound.mp3"));
+//        this.backgroundMusic.setLooping(true);
+//        this.backgroundMusic.setVolume(1.0f);
         centerAndScaleLevelTablet();
     }
 
@@ -79,7 +79,7 @@ public class Pause implements Screen {
     }
 
     public void show() {
-        backgroundMusic.play();
+//        backgroundMusic.play();
     }
 
     public void render(float delta) {
@@ -142,6 +142,6 @@ public class Pause implements Screen {
         stage.dispose();
         pauselevelGen.dispose();
         debugRenderer.dispose();
-        backgroundMusic.dispose();
+//        backgroundMusic.dispose();
     }
 }

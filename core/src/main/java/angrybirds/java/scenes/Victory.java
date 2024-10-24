@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Loose implements Screen {
+public class Victory implements Screen {
     private Main game;
     private Texture bg;
     private OrthographicCamera mainCamera;
@@ -21,10 +21,11 @@ public class Loose implements Screen {
 
 
     private Sprite tablet;
-    private Sprite tryagain;
-    public Loose(Main game) {
+    private Sprite tablet2;
+    private Sprite next;
+    public Victory(Main game) {
         this.game = game;
-        this.bg = new Texture("Background/loose.jpg");
+        this.bg = new Texture("Background/victory page.jpg");
 
         // Set up the camera and viewport
         this.mainCamera = new OrthographicCamera();
@@ -35,18 +36,20 @@ public class Loose implements Screen {
 
         // Set up main menu buttons
 //        this.btns = new MainMenuButtons(game, gameViewport);
-        this.tablet=new Sprite(new Texture("Background/wood.png"));
+        this.tablet=new Sprite(new Texture("Background/victory.png"));
+        this.tablet2=new Sprite(new Texture("Background/wood.png"));
+//        this.tryagain  = new Sprite(new Texture("Background/TryAgain.png"));
+        this.next = new Sprite(new Texture("Background/NextLevel.png"));
+        next.setSize(260, 65);
+
         // Load the background music
 //        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Main Theme.mp3"));
 //        this.backgroundMusic.setLooping(true);  // Set to loop continuously
-//        this.backgroundMusic.setVolume(0.5f);   // Set volume (adjust to your preference)
-        this.tryagain  = new Sprite(new Texture("Background/TryAgain.png"));
-        tryagain.setSize(275, 65);
+//        this.backgroundMusic.setVolume(0.5f);
     }
 
     @Override
     public void show() {
-        // Play the background music when the menu screen is shown
 //        backgroundMusic.play();
     }
 
@@ -85,11 +88,11 @@ public class Loose implements Screen {
 
         // Draw the tablet sprite
         tablet.draw(game.getBatch());
-        tryagain.draw(game.getBatch());
+        tablet2.draw(game.getBatch());
+        next.draw(game.getBatch());
 
         game.getBatch().end();
 
-        // Set the batch to use the camera's projection matrix
         game.getBatch().setProjectionMatrix(mainCamera.combined);
         checkForClicks();
     }
@@ -103,17 +106,24 @@ public class Loose implements Screen {
         float screenHeight = Gdx.graphics.getHeight() ;
 
         // Define the size for the level tablets
-        float tabletWidth = screenWidth * 0.25f;
-        float tabletHeight = screenHeight * 0.11f;
+        float tabletWidth = screenWidth * 0.15f;
+        float tabletHeight = screenHeight * 0.01f;
 
         tablet.setPosition(
-            (screenWidth - tabletWidth) / 2 + 100,  // Adjust horizontal offset
-            (screenHeight - tabletHeight) / 2 + 400 // Adjust vertical offset
+            (screenWidth - tabletWidth) / 2 - 300,  // Adjust horizontal offset
+            (screenHeight - tabletHeight) / 2 - 500 // Adjust vertical offset
         );
-        tryagain.setPosition(
-            (screenWidth - tabletWidth) / 2 +110,  // Adjust horizontal offset
-            (screenHeight - tabletHeight) / 2 +419// Adjust vertical offset
+
+        tablet2.setPosition(
+            (screenWidth - tabletWidth) / 2 + 700,  // Adjust horizontal offset
+            (screenHeight - tabletHeight) / 2 - 200 // Adjust vertical offset
         );
+
+        next.setPosition(
+            (screenWidth - tabletWidth) / 2+720,  // Adjust horizontal offset
+            (screenHeight - tabletHeight) / 2 -85-100// Adjust vertical offset
+        );
+
     }
 
 
@@ -132,10 +142,10 @@ public class Loose implements Screen {
         mousePos.y = Gdx.graphics.getHeight() - mousePos.y; // Invert Y-axis
 
 
-        if(tryagain.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
+        if(next.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
             game.setScreen(new GameScreen(game));
         }
-        if(tablet.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
+        if(tablet2.getBoundingRectangle().contains(mousePos.x, mousePos.y) && Gdx.input.isTouched()){
             game.setScreen(new GameScreen(game));
         }
     }
@@ -150,6 +160,5 @@ public class Loose implements Screen {
         // Dispose of all resources when no longer needed
         bg.dispose();
 //        backgroundMusic.dispose();  // Dispose of the music to avoid memory leaks
-
     }
 }
